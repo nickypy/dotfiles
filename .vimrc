@@ -28,6 +28,11 @@ Plug 'preservim/nerdtree'
 let g:NERDTreeWinPos = "right"
 map <C-n> :NERDTreeToggle<CR>
 
+Plug 'preservim/nerdcommenter'
+let g:NERDSpaceDelims = 1
+let g:NERDToggleCheckAllLines = 1
+map <C-C> <Plug>NERDCommenterToggle
+
 Plug 'dense-analysis/ale'
 let g:ale_fixers = {
             \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -51,6 +56,7 @@ call plug#end()
 
 if has('autocmd')
     filetype plugin indent on
+    filetype plugin on
 endif
 
 if has('syntax') && !exists('g:syntax_on')
@@ -79,7 +85,7 @@ set splitright
 set mouse=a
 colorscheme papercolor
 
-set guifont=Menlo:h14
+set guifont=Fira\ Code\ Retina:h14
 set guioptions-=r
 set guioptions-=L
 if !has('nvim') && &ttimeoutlen == -1
