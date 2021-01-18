@@ -16,13 +16,13 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+Plug 'ap/vim-buftabline'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-fugitive'
 
 Plug 'ctrlpvim/ctrlp.vim'
 map <C-p> :CtrlP<CR>
-map <C-t> :CtrlPTag<CR>
 
 Plug 'preservim/nerdtree'
 let g:NERDTreeWinPos = "right"
@@ -38,7 +38,7 @@ let g:ale_fixers = {
             \   '*': ['remove_trailing_lines', 'trim_whitespace'],
             \   'python': ['black'],
             \   'rust': ['rustfmt'],
-            \   'go': ['gofmt'],
+            \   'go': ['gofmt', 'goimports'],
             \}
 let g:ale_linters = {
             \   'go': ['golint', 'gopls'],

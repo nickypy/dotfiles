@@ -19,8 +19,16 @@ function notify-done() {
 EOM
 }
 
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 autoload -Uz vcs_info
 precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats ' %F{green}on%f %s:%F{cyan}%b%f'
 setopt PROMPT_SUBST
 export PROMPT='%B%F{magenta}%~%f${vcs_info_msg_0_} %b'
+
+if [[ -f ~/.secrets ]]; then
+    source ~/.secrets
+fi
