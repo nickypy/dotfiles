@@ -12,6 +12,9 @@ alias gs="git status"
 alias gco="git checkout"
 alias l="ls -la"
 
+# for a less noisy `dotfiles status`
+dotfiles config --local status.showUntrackedFiles no
+
 # can do cool things like `some-long-command && notify-done DONE`
 function notify-done() {
     osascript <<-EOM
