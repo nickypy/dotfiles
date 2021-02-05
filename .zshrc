@@ -19,6 +19,13 @@ function notify-done() {
 EOM
 }
 
+# homebrew completions
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    autoload -Uz compinit
+    compinit
+fi
+
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
