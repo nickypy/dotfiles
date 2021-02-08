@@ -29,6 +29,7 @@ if type brew &>/dev/null; then
     compinit
 fi
 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
