@@ -43,3 +43,7 @@ export PROMPT='%B%F{magenta}%~%f${vcs_info_msg_0_} %b'
 if [[ -f ~/.secrets ]]; then
     source ~/.secrets
 fi
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
