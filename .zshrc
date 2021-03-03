@@ -22,6 +22,13 @@ function notify-done() {
 EOM
 }
 
+# source a virtualenv, if available
+function check-venv() {
+    if [[ -d ./venv ]]; then
+        source ./venv/bin/activate
+    fi
+}
+
 # homebrew completions
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -29,7 +36,9 @@ if type brew &>/dev/null; then
     compinit
 fi
 
+# case insensitive completions
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
@@ -47,3 +56,7 @@ fi
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+autoload -U add-zsh-hook
+add-zsh-hook -Uz chpwd check-venv
+check-venv
