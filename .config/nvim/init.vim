@@ -105,14 +105,15 @@ set statusline+=\ %p%%
 
 """ Configs in Lua
 lua <<EOF
+-- gitsigns
 require('gitsigns').setup{
-signcolumn=auto,
-on_attach=function()
-vim.wo.signcolumn = "yes"
-end
+    signcolumn=auto,
+    on_attach=function()
+        vim.wo.signcolumn = "yes"
+    end
 }
 
-require('telescope'
+require('telescope').setup{}
 
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -123,38 +124,39 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
--- Enable completion triggered by <c-x><c-o>
-vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
--- Mappings.
--- See `:help vim.lsp.*` for documentation on any of the below functions
-local bufopts = { noremap=true, silent=true, buffer=bufnr }
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wl', function()
-print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-end, bufopts)
-vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wl', function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end
+    , bufopts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
-require("null-ls").setup({
-sources = {
-    require("null-ls").builtins.formatting.black,
-    require("null-ls").builtins.diagnostics.ruff,
-    require("null-ls").builtins.diagnostics.mypy,
-},
-})
+require("null-ls").setup{
+    sources = {
+        require("null-ls").builtins.formatting.black,
+        require("null-ls").builtins.diagnostics.ruff,
+        require("null-ls").builtins.diagnostics.mypy,
+    },
+}
 
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
     ensure_installed = "all",
     highlight = {
         enable = true,
@@ -163,7 +165,7 @@ require'nvim-treesitter.configs'.setup {
     indent = {
         enabled = true,
     }
-    }
+}
 
 -- setup completions
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -174,14 +176,14 @@ local servers = { 'pyright', 'rust_analyzer', 'gopls' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach=on_attach,
-        capabilities = capabilities,
+        capabilities=capabilities,
     }
-    end
+end
 
-    -- nvim-cmp setup
-    local cmp = require 'cmp'
-    cmp.setup {
-        mapping = cmp.mapping.preset.insert({
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+    mapping = cmp.mapping.preset.insert({
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         -- ['<C-Space>'] = cmp.mapping.complete(),
@@ -190,31 +192,31 @@ for _, lsp in ipairs(servers) do
             select = true,
         },
         ['<Tab>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-            cmp.select_next_item()
-        else
-            fallback()
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
             end
-            end, { 'i', 's' }),
-            ['<S-Tab>'] = cmp.mapping(function(fallback)
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
                 fallback()
-                end
-                end, { 'i', 's' }),
-        }),
-        sources = {
-            { name = 'nvim_lsp' },
-        },
-    }
+            end
+        end, { 'i', 's' }),
+    }),
+    sources = {
+        { name = 'nvim_lsp' },
+    },
+}
 
-    vim.opt.list = true
-    vim.opt.listchars:append "eol:↴"
+vim.opt.list = true
+vim.opt.listchars:append "eol:↴"
 
-    require("indent_blankline").setup {
-        show_end_of_line = true,
-    }
-    EOF
+require("indent_blankline").setup {
+    show_end_of_line = true,
+}
+EOF
