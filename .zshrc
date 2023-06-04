@@ -1,6 +1,6 @@
 export PATH=~/go/bin:$PATH
 export PATH=~/dev/bin:$PATH
-export EDITOR=vim
+export EDITOR=nvim
 
 alias vi="nvim"
 alias vim="nvim"
