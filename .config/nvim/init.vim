@@ -157,7 +157,7 @@ require("null-ls").setup{
 }
 
 require('nvim-treesitter.configs').setup {
-    ensure_installed = "all",
+    ensure_installed = { "python", "rust", "terraform", "bash", "vim" },
     highlight = {
         enable = true,
         disable = { "markdown", "json" },
