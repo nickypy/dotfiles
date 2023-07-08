@@ -42,10 +42,13 @@ call plug#end()
 "
 " Custom maps
 "
-nnoremap <Esc><Esc> :noh<CR>
+map <Esc> :noh<CR>
 nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<CR>
 nnoremap <C-b> <cmd>lua require('telescope.builtin').buffers()<CR>
 nnoremap <M-t> <cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>
+nnoremap <M-g> <cmd>lua require('telescope.builtin').git_status()<CR>
+nnoremap <M-f> <cmd>lua require('telescope.builtin').live_grep()<CR>
+nnoremap <M-o> <cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>
 nnoremap <C-Space> <Plug>NERDCommenterToggle
 vnoremap <C-Space> <Plug>NERDCommenterToggle
 
@@ -122,7 +125,13 @@ require('gitsigns').setup{
     end
 }
 
-require('telescope').setup{}
+require('telescope').setup{
+    defaults = {
+        preview = {
+            treesitter = false
+        }
+    }
+}
 
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -205,7 +214,7 @@ cmp.setup {
     }),
     sources = {
         { name = 'nvim_lsp' },
-        { name = 'vsip' },
+        { name = 'vsnip' },
         { name = 'buffer' },
     },
 }
