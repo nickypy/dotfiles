@@ -15,6 +15,12 @@ alias grecent="git branch --sort=-committerdate"
 alias l="ls -la"
 alias docker-shell="docker run -it --entrypoint /bin/bash"
 
+# history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt share_history
+
 # for a less noisy `dotfiles status`
 dotfiles config --local status.showUntrackedFiles no
 
