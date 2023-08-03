@@ -11,6 +11,7 @@ alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias gs="git status"
 alias gco="git checkout"
 alias gdiff="git diff"
+alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias grecent="git branch --sort=-committerdate"
 alias l="ls -la"
 alias docker-shell="docker run -it --entrypoint /bin/bash"
