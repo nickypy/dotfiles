@@ -78,6 +78,14 @@ if command -v pyenv 1>/dev/null 2>&1; then
 		eval "$(pyenv init -)" 
 fi
 
+# WSL specific stuff
+if [[ $(uname -r | grep -i WSL2) ]]; then
+	# mimic `open` from macOS
+	function open() {
+		/mnt/c/Windows/explorer.exe $(wslpath -w $1)
+	}
+fi
+
 # auto sources `venv` when available
 autoload -U add-zsh-hook
 add-zsh-hook -Uz chpwd check-venv
