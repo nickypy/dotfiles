@@ -21,6 +21,9 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-sleuth'
 
+Plug 'mhinz/vim-startify'
+let g:startify_custom_header = []
+
 Plug 'preservim/nerdcommenter'
 let g:NERDSpaceDelims = 1
 let g:NERDToggleCheckAllLines = 1
