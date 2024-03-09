@@ -187,14 +187,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
-require("null-ls").setup{
-    sources = {
-        require("null-ls").builtins.formatting.black,
-        require("null-ls").builtins.diagnostics.ruff,
-        require("null-ls").builtins.diagnostics.mypy,
-    },
-}
-
 require('nvim-treesitter.configs').setup {
     ensure_installed = { "python", "rust", "terraform", "bash", "vim" },
     highlight = {
