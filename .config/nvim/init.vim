@@ -10,8 +10,10 @@ call plug#begin('~/.vim/plugged')
 "
 " Themes
 "
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'dracula/vim'
 
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -55,6 +57,7 @@ nnoremap <M-o> <cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>
 nnoremap <C-Space> <Plug>NERDCommenterToggle
 vnoremap <C-Space> <Plug>NERDCommenterToggle
 
+
 " Annoying defaults
 let g:vim_json_conceal=0
 
@@ -86,7 +89,7 @@ set t_Co=256
 set clipboard+=unnamed
 set splitright
 set mouse=a
-colorscheme dracula
+colorscheme catppuccin-frappe
 
 set guifont=Fira\ Code\ Retina:h14
 set guioptions-=r
@@ -195,6 +198,7 @@ require('nvim-treesitter.configs').setup {
     },
     indent = {
         enabled = true,
+        diable = { 'python' },
     }
 }
 
