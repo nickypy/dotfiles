@@ -84,6 +84,9 @@ if [[ $(uname -r | grep -i WSL2) ]]; then
 	function open() {
 		/mnt/c/Windows/explorer.exe $(wslpath -w $1)
 	}
+
+	# not sure why this defaults to 1024
+	ulimit -n unlimited
 fi
 
 # auto sources `venv` when available
