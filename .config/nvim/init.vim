@@ -26,12 +26,6 @@ Plug 'tpope/vim-sleuth'
 Plug 'mhinz/vim-startify'
 let g:startify_custom_header = []
 
-Plug 'preservim/nerdcommenter'
-let g:NERDSpaceDelims = 1
-let g:NERDToggleCheckAllLines = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDCommentEmptyLines = 1
-
 "
 " Completions
 "
@@ -54,8 +48,8 @@ nnoremap <M-t> <cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbo
 nnoremap <M-g> <cmd>lua require('telescope.builtin').git_status()<CR>
 nnoremap <M-f> <cmd>lua require('telescope.builtin').live_grep()<CR>
 nnoremap <M-o> <cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>
-nnoremap <C-Space> <Plug>NERDCommenterToggle
-vnoremap <C-Space> <Plug>NERDCommenterToggle
+map <C-Space> gcc<CR>
+vmap <C-Space> gc<CR>
 
 
 " Annoying defaults
@@ -210,7 +204,6 @@ local lspconfig = require('lspconfig')
 local servers = { 'pyright', 'rust_analyzer', 'gopls', 'terraform_lsp' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
-        on_attach=on_attach,
         capabilities=capabilities,
     }
 end
