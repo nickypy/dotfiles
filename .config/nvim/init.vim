@@ -10,8 +10,7 @@ call plug#begin('~/.vim/plugged')
 "
 " Themes
 "
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-Plug 'dracula/vim'
+Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
 
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'nvim-lua/plenary.nvim'
@@ -83,7 +82,7 @@ set t_Co=256
 set clipboard+=unnamed
 set splitright
 set mouse=a
-colorscheme catppuccin-frappe
+colorscheme moonfly
 
 set guifont=Fira\ Code\ Retina:h14
 set guioptions-=r
