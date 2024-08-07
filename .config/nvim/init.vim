@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
 " Themes
 "
 Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
+Plug 'nyoom-engineering/oxocarbon.nvim'
 
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'nvim-lua/plenary.nvim'
@@ -82,7 +83,7 @@ set t_Co=256
 set clipboard+=unnamed
 set splitright
 set mouse=a
-colorscheme moonfly
+colorscheme oxocarbon
 
 set guifont=Fira\ Code\ Retina:h14
 set guioptions-=r
