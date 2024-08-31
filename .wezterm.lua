@@ -12,7 +12,7 @@ config.color_scheme = 'Oxocarbon Dark (Gogh)'
 
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 	config.font_size = 12.0
-	config.default_prog = { 'Powershell' }
+	config.default_domain = 'WSL:Ubuntu'
 else
 	config.font_size = 14.0
 end
