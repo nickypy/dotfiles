@@ -156,7 +156,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local lspconfig = require('lspconfig')
-local servers = { 'pyright', 'rust_analyzer', 'gopls', 'terraformls' }
+local servers = { 'pyright', 'rust_analyzer', 'gopls', 'terraformls', 'ts_ls' }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         capabilities=capabilities,
@@ -196,10 +196,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { "python", "rust", "terraform", "bash", "vim" },
+    ensure_installed = { "python", "rust", "terraform", "bash", "vim", "javascript", "typescript" },
     highlight = {
         enable = true,
-        disable = { "markdown", "json" },
+        disable = { "json" },
     },
     indent = {
         enabled = true,
