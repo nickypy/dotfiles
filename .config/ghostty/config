@@ -1,0 +1,14 @@
+font-family = Hack
+font-family = SF Mono
+font-size = 14
+
+theme = Oxocarbon
+
+window-theme = dark
+window-inherit-working-directory = true
+window-width = 140
+window-height = 40
+window-padding-x = 8
+window-padding-y = 8
+
+macos-titlebar-style = native
