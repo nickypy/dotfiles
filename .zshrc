@@ -16,6 +16,8 @@ alias grecent="git branch --sort=-committerdate"
 alias l="ls -la"
 alias docker-shell="docker run -it --entrypoint /bin/bash"
 
+git config --global init.defaultBranch main
+
 # history
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
