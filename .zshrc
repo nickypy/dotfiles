@@ -4,7 +4,7 @@ export EDITOR=nvim
 
 alias vi="nvim"
 alias vim="nvim"
-alias editvim="vim ~/.config/nvim/init.vim"
+alias editvim="vim ~/.config/nvim/init.lua"
 alias editzsh="vim ~/.zshrc"
 alias venv="source ./venv/bin/activate"
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
