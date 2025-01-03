@@ -49,6 +49,7 @@ vim.opt.ruler = true
 vim.opt.display:append("lastline")
 vim.opt.autoread = true
 vim.opt.tags:append(".tags")
+vim.cmd("colo default")
 
 -- Statusline configuration
 vim.opt.statusline:append("")
