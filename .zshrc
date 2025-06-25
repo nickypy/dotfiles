@@ -60,7 +60,7 @@ autoload -Uz vcs_info
 precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats ' %F{green}on%f %s:%F{cyan}%b%f'
 setopt PROMPT_SUBST
-export PROMPT='%B%F{magenta}%~%f${vcs_info_msg_0_} %b'
+export PROMPT='%F{cyan}%n@%m%f %B%F{magenta}%~%f${vcs_info_msg_0_} %b'
 
 FILES_TO_SOURCE=(
 		~/.secrets
@@ -101,3 +101,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 export PATH=$HOME/bin:$PATH
 export PATH="/usr/local/sbin:$PATH"
+
+alias love="/Applications/love.app/Contents/MacOS/love"
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"

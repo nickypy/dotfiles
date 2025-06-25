@@ -24,6 +24,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<Esc>', ':nohl<CR>', { silent = true })
 
+vim.opt.tabstop = 2
 vim.opt.hidden = true
 vim.opt.backup = false
 vim.opt.writebackup = false
@@ -145,7 +146,8 @@ require("lazy").setup({
       },
       config = function()
         -- setup completions
-        local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
         -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
         local lspconfig = require('lspconfig')
@@ -156,6 +158,9 @@ require("lazy").setup({
           'terraformls',
           'ts_ls',
           'lua_ls',
+          'clangd',
+          'clojure_lsp',
+          'html',
         }
         for _, lsp in ipairs(servers) do
           lspconfig[lsp].setup {
@@ -215,21 +220,33 @@ require("lazy").setup({
       'hrsh7th/nvim-cmp',
       event = 'InsertEnter',
       dependencies = {
+        {
+          'L3MON4D3/LuaSnip',
+          build = (function()
+            if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+              return
+            end
+            return 'make install_jsregexp'
+          end)()
+        },
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-cmdline',
-        'hrsh7th/cmp-vsnip',
-        'hrsh7th/vim-vsnip',
+        'saadparwaiz1/cmp_luasnip',
       },
       config = function()
         local cmp = require 'cmp'
+        local luasnip = require 'luasnip'
+        luasnip.config.setup {}
+
         cmp.setup {
           snippet = {
             expand = function(args)
-              vim.fn["vsnip#anonymous"](args.body)
+              luasnip.lsp_expand(args.body)
             end
           },
+          completion = { completeopt = 'menu,menuone,noinsert' },
           mapping = cmp.mapping.preset.insert({
             ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -276,5 +293,5 @@ require("lazy").setup({
     }
   },
   install = { colorscheme = { 'oxocarbon' } },
-  checker = { enabled = true },
+  checker = { enabled = true, notify = false },
 })
