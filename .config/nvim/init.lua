@@ -159,8 +159,8 @@ require("lazy").setup({
           'ts_ls',
           'lua_ls',
           'clangd',
-          'clojure_lsp',
           'html',
+          'jdtls',
         }
         for _, lsp in ipairs(servers) do
           lspconfig[lsp].setup {
