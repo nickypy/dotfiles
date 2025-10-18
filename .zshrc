@@ -14,7 +14,6 @@ alias gdiff="git diff"
 alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias grecent="git branch --sort=-committerdate"
 alias l="ls -la"
-alias docker-shell="docker run -it --entrypoint /bin/bash"
 
 git config --global init.defaultBranch main
 
@@ -31,6 +30,8 @@ dotfiles config --local status.showUntrackedFiles no
 function check-venv() {
 if [[ -d ./venv ]]; then
 		source ./venv/bin/activate
+elif [[ -d ./.venv ]]; then
+		source ./.venv/bin/activate
 fi
 }
 
@@ -60,7 +61,8 @@ autoload -Uz vcs_info
 precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats ' %F{green}on%f %s:%F{cyan}%b%f'
 setopt PROMPT_SUBST
-export PROMPT='%F{cyan}%n@%m%f %B%F{magenta}%~%f${vcs_info_msg_0_} %b'
+# export PROMPT='%F{cyan}%n@%m%f %B%F{magenta}%~%f${vcs_info_msg_0_} %b'
+export PROMPT='%B%F{magenta}%~%f${vcs_info_msg_0_} %b'
 
 FILES_TO_SOURCE=(
 		~/.secrets
@@ -72,13 +74,6 @@ FILES_TO_SOURCE=(
 for i in ${FILES_TO_SOURCE[@]}; do
 		[ -f $i ] && source $i
 done
-
-if command -v pyenv 1>/dev/null 2>&1; then
-		export PYENV_ROOT="$HOME/.pyenv"
-		export PATH="$PYENV_ROOT/bin:$PATH"
-		eval "$(pyenv init --path)"
-		eval "$(pyenv init -)" 
-fi
 
 # WSL specific stuff
 if [[ $(uname -r | grep -i WSL2) ]]; then
@@ -96,11 +91,6 @@ autoload -U add-zsh-hook
 add-zsh-hook -Uz chpwd check-venv
 check-venv
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 export PATH=$HOME/bin:$PATH
 export PATH="/usr/local/sbin:$PATH"
 
-alias love="/Applications/love.app/Contents/MacOS/love"
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
