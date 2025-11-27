@@ -150,7 +150,6 @@ require("lazy").setup({
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
         -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-        local lspconfig = require('lspconfig')
         local servers = {
           'pyright',
           'rust_analyzer',
@@ -160,12 +159,12 @@ require("lazy").setup({
           'lua_ls',
           'clangd',
           'html',
-          'jdtls',
         }
         for _, lsp in ipairs(servers) do
-          lspconfig[lsp].setup {
+          vim.lsp.config(lsp, {
             capabilities = capabilities,
-          }
+          })
+          vim.lsp.enable(lsp)
         end
 
         -- Use LspAttach autocommand to only map the following keys
