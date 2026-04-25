@@ -6,7 +6,7 @@ alias vi="nvim"
 alias vim="nvim"
 alias editvim="vim ~/.config/nvim/init.lua"
 alias editzsh="vim ~/.zshrc"
-alias venv="source ./venv/bin/activate"
+alias venv="check-venv"
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias gs="git status"
 alias gco="git checkout"

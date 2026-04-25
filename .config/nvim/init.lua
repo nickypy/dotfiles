@@ -104,7 +104,15 @@ require("lazy").setup({
       event = 'VimEnter',
       dependencies = { 'nvim-lua/plenary.nvim' },
       config = function()
-        require('telescope').setup {}
+        require('telescope').setup {
+          defaults = {
+            layout_strategy = 'vertical',
+            layout_config = {
+              height = 0.95,
+              width = 0.9,
+            }
+          }
+        }
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<C-p>', builtin.find_files)
@@ -116,28 +124,13 @@ require("lazy").setup({
       end
     },
     {
-      'nvim-treesitter/nvim-treesitter',
-      build = ':TSUpdate',
-      main = 'nvim-treesitter.configs',
-      lazy = false,
-      opts = {
-        ensure_installed = {
-          "python",
-          "rust",
-          "terraform",
-          "bash",
-          "vim",
-          "javascript",
-          "typescript",
-          "glsl",
-          "lua",
-        },
-        auto_install = true,
-        highlight = {
-          enable = true,
-        },
-        indent = { enable = true },
-      },
+      "romus204/tree-sitter-manager.nvim",
+      dependencies = {},
+      config = function()
+        require("tree-sitter-manager").setup({
+          auto_install = true
+        })
+      end
     },
     {
       'neovim/nvim-lspconfig',
@@ -151,7 +144,8 @@ require("lazy").setup({
 
         -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
         local servers = {
-          'pyright',
+          'ty',
+          'ruff',
           'rust_analyzer',
           'gopls',
           'terraformls',
@@ -159,6 +153,7 @@ require("lazy").setup({
           'lua_ls',
           'clangd',
           'html',
+          'bashls',
         }
         for _, lsp in ipairs(servers) do
           vim.lsp.config(lsp, {
@@ -289,6 +284,21 @@ require("lazy").setup({
         local cmp = require 'cmp'
         cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
       end,
+    },
+    {
+      'nvim-neo-tree/neo-tree.nvim',
+      branch = 'v3.x',
+      dependencies = {
+        'nvim-lua/plenary.nvim',
+        'MunifTanjim/nui.nvim',
+        'nvim-tree/nvim-web-devicons',
+      },
+      lazy = false,
+      opts = {
+        window = {
+          position = 'float'
+        }
+      }
     }
   },
   install = { colorscheme = { 'oxocarbon' } },
