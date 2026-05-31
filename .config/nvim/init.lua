@@ -1,6 +1,5 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-print(lazypath)
 if not vim.uv.fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -19,8 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.json_conceal = false
 
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 vim.keymap.set('n', '<Esc>', ':nohl<CR>', { silent = true })
 
@@ -32,11 +29,6 @@ vim.opt.updatetime = 300
 vim.opt.background = 'dark'
 vim.opt.number = true
 vim.opt.swapfile = false
-vim.opt.autoindent = true
-vim.opt.backspace = 'indent,eol,start'
-vim.opt.complete:remove('i')
-vim.opt.smarttab = true
-vim.opt.nrformats:remove('octal')
 vim.opt.termguicolors = true
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.splitright = true
@@ -44,25 +36,20 @@ vim.opt.splitbelow = true
 vim.opt.mouse = 'a'
 vim.opt.breakindent = true
 vim.opt.signcolumn = "number"
-vim.opt.incsearch = true
-vim.opt.laststatus = 2
-vim.opt.ruler = true
-vim.opt.display:append("lastline")
 vim.opt.autoread = true
 vim.opt.tags:append(".tags")
-vim.cmd("colo default")
 
 -- Statusline configuration
-vim.opt.statusline:append("")
-vim.opt.statusline:append(" %f")                                       -- File path
-vim.opt.statusline:append("%m")                                        -- Modified flag
-vim.opt.statusline:append("%=")                                        -- Center alignment
-vim.opt.statusline:append("%{get(b:,'gitsigns_head','')}")             -- Git branch
-vim.opt.statusline:append("%#CursorColumn#")                           -- Highlight color
-vim.opt.statusline:append(" %y")                                       -- File type
-vim.opt.statusline:append(" %{&fileencoding?&fileencoding:&encoding}") -- File encoding
-vim.opt.statusline:append("[%{&fileformat}]")                          -- File format
-vim.opt.statusline:append(" %p%%")                                     -- File percentage
+vim.opt.statusline =
+  " %f%m" ..                                          -- path + modified
+  "%=" ..                                             -- right align
+  "%{get(b:,'gitsigns_head','')}" ..                  -- git branch
+  "%#CursorColumn#" ..                                -- highlight on
+  " %y" ..                                            -- filetype
+  " %{&fileencoding!=#''?&fileencoding:&encoding}" .. -- encoding
+  "[%{&fileformat}]" ..                               -- fileformat
+  " %p%% " ..                                         -- percentage
+  "%*"                                                -- highlight reset
 
 if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
@@ -79,6 +66,10 @@ if vim.fn.has("wsl") == 1 then
   }
 end
 
+vim.g.python_indent = {
+  open_paren = 'shiftwidth()',           -- inside = one shiftwidth
+  closed_paren_align_last_line = false,  -- closing bracket lines up with the opening line
+}
 
 require("lazy").setup({
   spec = {
@@ -249,7 +240,7 @@ require("lazy").setup({
           }),
           sources = {
             { name = 'nvim_lsp' },
-            { name = 'vsnip' },
+            { name = 'luasnip' },
             { name = 'buffer' },
           },
         }
