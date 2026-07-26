@@ -64,7 +64,6 @@ FILES_TO_SOURCE=(
 		~/.secrets
 		~/.zprofile
 		~/.cargo/env
-		~/.fzf.sh
 )
 
 for i in ${FILES_TO_SOURCE[@]}; do
@@ -89,3 +88,4 @@ check-venv
 
 export PATH=$HOME/bin:$PATH
 export PATH="/usr/local/sbin:$PATH"
+source <(fzf --zsh)
