@@ -1,0 +1,15 @@
+theme = "oxo"
+
+[editor]
+atomic-save = false
+auto-format = false
+bufferline = "multiple"
+
+[editor.cursor-shape]
+insert = "bar"
+
+[editor.statusline]
+right = ["diagnostics", "selections", "register", "position", "file-encoding", "version-control"]
+
+[editor.indent-guides]
+render = true
