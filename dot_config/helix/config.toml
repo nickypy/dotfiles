@@ -4,6 +4,7 @@ theme = "oxo"
 atomic-save = false
 auto-format = false
 bufferline = "multiple"
+default-yank-register = "+"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -13,3 +14,16 @@ right = ["diagnostics", "selections", "register", "position", "file-encoding", "
 
 [editor.indent-guides]
 render = true
+
+[keys.normal]
+"#" = "toggle_comments"
+"0" = "goto_first_nonwhitespace"
+"$" = "goto_line_end"
+"{" = "goto_prev_paragraph"
+"}" = "goto_next_paragraph"
+
+[keys.select]
+"0" = "goto_first_nonwhitespace"
+"$" = "goto_line_end"
+"{" = "goto_prev_paragraph"
+"}" = "goto_next_paragraph"
