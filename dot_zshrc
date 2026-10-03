@@ -1,11 +1,7 @@
 export PATH=~/go/bin:$PATH
 export PATH=~/dev/bin:$PATH
-export EDITOR=nvim
+export EDITOR=hx
 
-alias vi="nvim"
-alias vim="nvim"
-alias editvim="vim ~/.config/nvim/init.lua"
-alias editzsh="vim ~/.zshrc"
 alias venv="check-venv"
 alias gs="git status"
 alias gco="git checkout"
